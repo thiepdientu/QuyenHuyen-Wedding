@@ -852,7 +852,10 @@
 
     <!-- LỜI CHÚC -->
     <!-- TIN NHẮN -->
- <section id="message" class="section-message uk-background-cover uk-section" style="background-image:url(images/KHT8dcUkSDpJEjOXynqUY1y2JZwasCvwPKNNGDCQ.jpg); display:block;margin-top:70px;">
+ 
+
+
+   <section id="message" class="section-message uk-background-cover uk-section" style="background-image:url(images/KHT8dcUkSDpJEjOXynqUY1y2JZwasCvwPKNNGDCQ.jpg); display:block">
         <div class="uk-position-cover uk-overlay uk-overlay-primary" style="opacity:.5"> </div>
         <div class="message-container container uk-position-relative uk-position-z-index">
             <h2 class="section-title uk-light" style="color:white">
@@ -870,13 +873,24 @@
 
                 <h3 class="form-title" style="color:white">Gửi lời chúc</h3>
                 <form action="" id="customForm">
-                    <div class="input-group uk-margin-top" style="color:white">
+                    <!-- <div class="input-group uk-margin-top" style="color:white">
                         <label for="">
                             Tên của bạn </label>
                         <input style="border:1px solid white" id="name" type="text" class="input blur-bg" value="" required="">
                     </div>
+ -->
+                  <!--   <div class="input-group uk-margin-top">
+                        <label for="" style="color:white">
+                            Tên </label>
+                            <input style="border:1px solid white" type="text" id="ten" class="input blur-bg" required="">
+                            <label for="" style="color:white">
+                                Tên </label>
+                                <input style="border:1px solid white" type="text" id="accept" class="input blur-bg" required="">
+                    </div> -->
                     <div class="input-group uk-margin-top">
                         <label for="" style="color:white">
+                             Tên Của Bạn </label>
+                            <input style="border:1px solid white" type="text" id="ten" class="input blur-bg" required="">
                             Lời chúc </label>
                             <input style="border:1px solid white" type="text" id="messages" class="input blur-bg" required="">
                             <label for="" style="color:white">
@@ -887,22 +901,22 @@
                         lời chúc</button>
                 </form>
                 <p style="margin-top:10px;" id="status"></p>
-                <a href="https://docs.google.com/spreadsheets/d/1q_xSANCuEHNfaOj9NsJA4JpGIZOW4c7kgE0tcGB4huc/edit?usp=sharing" style="color:white">Xem lời chúc</a>
+                <a href="https://docs.google.com/spreadsheets/d/101Iuj8PKgWkgvPqfU9yIssRAomu_irSR_FutyUVio9U/edit?usp=sharing" style="color:white">Xem lời chúc</a>
             </div>
 
             <script>
                 document.getElementById("customForm").addEventListener("submit", function(event) {
                     event.preventDefault();
-                    let name = document.getElementById("name").value;
+                    let name = document.getElementById("ten").value;
                     let message = document.getElementById("messages").value;
                     let accept = document.getElementById("accept").value;         
                     // Thay thế bằng URL Google Form của bạn
-                    let googleFormURL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSdESqHZA4mrKXnzuQxpvXDGjLXZuIld0IHYHz_IwwpqUmG4Ug/formResponse";
+                    let googleFormURL = "https://docs.google.com/forms/u/0/d/e/1FAIpQLScydL27WRYhUjb5uR2YWlUZhvTgf9z-XoVvgzQM4l5Dn2KW8g/formResponse";
                     // Các entry ID (tìm trong Google Form)
                     let formData = new FormData();
-                    formData.append("entry.1502787355", name); 
-                    formData.append("entry.443035612", message); 
-                    formData.append("entry.1461880849", accept);
+                    formData.append("entry.486556586", name); 
+                    formData.append("entry.695980126", message); 
+                    formData.append("entry.637312009", accept);
         
                     fetch(googleFormURL, {
                         method: "POST",
@@ -918,53 +932,6 @@
             </script>
         </div>
     </section>
-    <!-- FROM XÁC NHẬN -->
-
-    <script>
-        //XỬ LÝ FORM
-        $(document).ready(function() {
-            $('.message-form').fadeOut(300)
-            $('#form').on('submit', function(e) {
-                e.preventDefault();
-                f_userName = "Đàm Quyền -Đỗ Huyền"
-                f_check = $('input[type="radio"]:checked').val()
-                f_name = $(this).find('#f_name').val()
-                f_numUser = $('#num_user').find('option:selected').val()
-                f_select = $('#wedding-select').find('option:selected').val()
-                f_text = $(this).find('#f_text').val()
-                var form_data = {
-                    'entry.737056527': f_userName,
-                    'entry.642873731': f_check,
-                    'entry.1699210899': f_name,
-                    'entry.369695229': f_numUser,
-                    'entry.1528762541': f_select,
-                    'entry.1679764871': f_text,
-                }
-                $('.wedding-submit[type="submit"]').text('Đang gửi ...')
-                $.ajax({
-                    url: "https://docs.google.com/forms/u/0/d/e/1FAIpQLSdD9g3WsFXklx1iJ2WTwnaKq7qXDh8fLcOetjSV8GMatzoWaA/formResponse",
-                    type: "POST",
-                    data: form_data,
-                    dataType: "xml",
-                    statusCode: {
-                        0: function() {
-                            mess_form = 'Chúng mình xin chân thành cám ơn !'
-                            $('.message-form').html(mess_form)
-                            $('button[type="submit"]').addClass('success')
-                            $('button[type="submit"]').removeClass('btn_primary')
-                            $('button[type="submit"]').attr('disabled', 'true')
-                            $('button[type="submit"]').text('Đã xác nhận')
-                            $('.message-form').fadeIn(300)
-                        },
-                        200: function() {
-                            alert('200')
-                        }
-                    }
-                })
-            })
-            return false;
-        })
-    </script>
     <!-- END FORM XÁC NHẬN -->
 
     <!-- GỬI QUÀ -->
